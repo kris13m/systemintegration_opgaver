@@ -1,0 +1,10 @@
+<car>
+    <make>Volkswagen</make>
+    <model>Passat</model>
+    <year>2020</year>
+    <features>
+        <feature>Bluetooth</feature>
+        <feature>Sunroof</feature>
+        <feature>Leather Seats</feature>
+    </features>
+</car>

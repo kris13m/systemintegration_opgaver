@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<me>
+    <name>Kristian</name>
+    <birth_year>2000</birth_year>
+    <hobbies>
+        <hobby>training</hobby>
+        <hobby>socializing</hobby>
+        <hobby>netflix</hobby>
+    </hobbies>
+</me>

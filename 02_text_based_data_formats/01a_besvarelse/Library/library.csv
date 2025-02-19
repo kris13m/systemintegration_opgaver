@@ -1,0 +1,4 @@
+library_name,location,book_title,author,year,genre,special_features
+City Library,Downtown,The Great Gatsby,F. Scott Fitzgerald,1925,Fiction,
+City Library,Downtown,1984,George Orwell,1949,Dystopian,
+City Library,Downtown,To Kill a Mockingbird,Harper Lee,1960,Fiction,"Available in multiple languages; E-books available"

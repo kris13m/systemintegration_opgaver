@@ -1,0 +1,11 @@
+XML ulempe:
+meget overhead, store filer
+HELE <me> skal læses og parses før man kan få indhold ud, f. eks <birth_year>. Der er MEGET overhead.
+Der er faktisk ikke så mange fordele ved XML
+
+Json
+bruger key-value pairs.
+der findes libraries til f. eks big Json
+som parser så hele objektet ikke skal læses.
+f. eks node.js's pipes library.
+

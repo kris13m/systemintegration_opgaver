@@ -1,0 +1,28 @@
+<library>
+  <name>City Library</name>
+  <location>Downtown</location>
+  <books>
+    <book>
+      <title>The Great Gatsby</title>
+      <author>F. Scott Fitzgerald</author>
+      <year>1925</year>
+      <genre>Fiction</genre>
+    </book>
+    <book>
+      <title>1984</title>
+      <author>George Orwell</author>
+      <year>1949</year>
+      <genre>Dystopian</genre>
+    </book>
+    <book>
+      <title>To Kill a Mockingbird</title>
+      <author>Harper Lee</author>
+      <year>1960</year>
+      <genre>Fiction</genre>
+    </book>
+  </books>
+  <features>
+    <feature>Available in multiple languages</feature>
+    <feature>E-books available</feature>
+  </features>
+</library>
