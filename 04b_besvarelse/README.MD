@@ -9,4 +9,4 @@ du har kun adgang til dine egne oplysninger og du kan opdatere din status.
 
 
 kør population.sql i MySQL
-login on bill
+log ind on bill
