@@ -55,8 +55,7 @@ elif(file_type == ".yml" or file_type == ".yaml"):
 elif(file_type == ".xml"):
     with open(file_path, "r") as file:
         data = xmltodict.parse(file.read())
-        xml_string = xmltodict.unparse(data, pretty=True, indent="  ")  # Customize the output
-        print(xml_string)
+        print(data)
 else:
     print("Unsupported file type.")
 

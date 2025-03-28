@@ -1,0 +1,4 @@
+make=Volkswagen
+model=Passat
+year=2020
+features=Bluetooth, Sunroof, Leather Seats
