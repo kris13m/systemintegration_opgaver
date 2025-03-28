@@ -3,6 +3,7 @@ import yaml
 import xmltodict
 from fastapi import FastAPI
 import json
+import httpx
 
 app = FastAPI()
 
@@ -41,3 +42,12 @@ def get_xml_data():
     with open("./Car/car.xml", "r") as file:
         data = xmltodict.parse(file.read())
         return data
+
+@app.get("/client")
+async def get_client_data():
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get("http://localhost:3000/json")
+            return response.json()
+    except httpx.RequestError as exc:
+        return {"error": f"Error fetching data from client server: {exc}"}

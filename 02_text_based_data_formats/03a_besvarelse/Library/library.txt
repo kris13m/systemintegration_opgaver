@@ -1,0 +1,15 @@
+library_name=City Library
+location=Downtown
+book_1_title=The Great Gatsby
+book_1_author=F. Scott Fitzgerald
+book_1_year=1925
+book_1_genre=Fiction
+book_2_title=1984
+book_2_author=George Orwell
+book_2_year=1949
+book_2_genre=Dystopian
+book_3_title=To Kill a Mockingbird
+book_3_author=Harper Lee
+book_3_year=1960
+book_3_genre=Fiction
+features=Available in multiple languages, E-books available
