@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css' // https://systemintegration-opgaver.vercel.app/ <- kører her
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
