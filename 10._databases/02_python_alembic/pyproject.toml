@@ -1,0 +1,19 @@
+[project]
+name = "02-python-alembic"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kristian Mortensen",email = "kristianbmortensen@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "psycopg2 (>=2.9.10,<3.0.0)",
+    "alembic (>=1.15.2,<2.0.0)",
+    "sqlalchemy (>=2.0.40,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
