@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mpeg-dash</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.12.6/shaka-player.compiled.js" integrity="sha512-tFq8ZxX0hhNnwiPQFvCZVNEXj4jwMo1Lp9r5rLr3aeZk/+rKPmOGiBr2n7tCnHbrY3/RuYu1KUTZwpKWOwmDOw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <video id="video" styles=""width="640" height="360" controls></video>
+
+    <script>
+        const video = document.getElementById('video');
+        const player = new shaka.Player(video);
+
+        async function init(){
+            try{
+                await player.load("/playlist.mpd");
+                console.log("shaka player loaded");
+            } catch(error){
+                console.log("error loading the file", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        player.addEventListener("adaptation", () =>{
+            const variant = player.getVariantTracks().find((track) => track.active);
+            console.log("shaka adapted to "+ variant.height);
+        })
+
+        player.load('https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd');
+    </script>
+</body>
+</html>
