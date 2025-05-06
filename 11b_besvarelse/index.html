@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stripe UI Demo</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    #card-element {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Fake Stripe Card Input (for looks only)</h2>
+  <form id="payment-form">
+    <div id="card-element"></div>
+  </form>
+
+  <script>
+    const stripe = Stripe('pk_test_51...'); // You can use a fake or test key
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
+  </script>
+</body>
+</html>
