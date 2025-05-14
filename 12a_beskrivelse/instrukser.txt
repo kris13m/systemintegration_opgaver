@@ -1,0 +1,15 @@
+start exposee's app.js in a terminal.
+start 
+
+send a POST request with payload format:
+{
+    "url":"example URL",
+    "event_type":"'order_received', 'order_processed' or 'order_shipped'"
+}
+to /register in order to register a webhook
+same format for /unregister to unregister a webhook.
+
+set up an api with a POST request on whatever port you've registered
+
+send a GET request to /ping 
+

@@ -19,7 +19,7 @@
   </form>
 
   <script>
-    const stripe = Stripe('pk_test_51...'); // You can use a fake or test key
+    const stripe = Stripe('pk_test_51...');
     const elements = stripe.elements();
     const card = elements.create('card');
     card.mount('#card-element');

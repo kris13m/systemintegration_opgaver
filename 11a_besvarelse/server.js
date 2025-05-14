@@ -1,69 +1,73 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bodyParser = require('body-parser');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
-// Dummy acc
-const fakeUser = {
-  id: 1,
-  username: 'test',
-  password: '1234' 
-};
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+let currentUser = null; // Variable to store the logged-in user
+
+// Session setup
 app.use(session({
   secret: 'secretKey',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
+
+// Passport setup
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Passport config
-passport.use(new LocalStrategy((username, password, done) => {
-  if (username === fakeUser.username && password === fakeUser.password) {
-    return done(null, fakeUser);
-  } else {
-    return done(null, false, { message: 'Incorrect credentials' });
-  }
+passport.use(new GoogleStrategy({
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: '/auth/google/callback',
+}, (accessToken, refreshToken, profile, done) => {
+  currentUser = profile;  // Store user in memory
+  return done(null, profile); // You could also save to DB here if needed
 }));
 
-passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser((id, done) => {
-  if (id === fakeUser.id) done(null, fakeUser);
-  else done(null, false);
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((obj, done) => done(null, obj));
+
+// Routes for the API
+app.get('/', (req, res) => {
+  // Show the logged-in user's info, or a login button if not logged in
+  if (currentUser) {
+    res.send(`
+      <h1>Hello, ${currentUser.displayName}!</h1>
+      <a href="/logout">Logout</a>
+    `);
+  } else {
+    res.send(`
+      <h1>Login with Google</h1>
+      <button onclick="window.location.href='/auth/google'">Login with Google</button>
+    `);
+  }
 });
 
-/* Routes
-app.get('/', (req, res) => {
-  res.send(req.isAuthenticated() ? `Hello, ${req.user.username}` : 'Not logged in');
-});*/
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
-app.get('/', (req, res) => {
-  res.send(`<form method="post" action="/login">
-    <input name="username" placeholder="Username" /><br/>
-    <input name="password" type="password" placeholder="Password" /><br/>
-    <button type="submit">Login</button>
-  </form>`);
-});
-
-app.post('/login',
-  passport.authenticate('local', {
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/login'
+    failureRedirect: '/',
   })
 );
 
 app.get('/logout', (req, res) => {
-  req.logout(() => {
-    res.redirect('/');
-  });
+  currentUser = null;  // Clear the stored user
+  res.redirect('/');
 });
 
-// Start server
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});

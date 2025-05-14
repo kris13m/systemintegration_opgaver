@@ -1,0 +1,12 @@
+gå til console.cloud.google.com
+
+login
+
+start et projekt
+
+setup consent
+
+lav OAuth client ID
+- type: web application
+
+brug client ID og client secret i din app

@@ -1,0 +1,22 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Login</title>
+</head>
+<body>
+  <h1>Login with Google</h1>
+  <button id="login-btn">Login with Google</button>
+
+  <script>
+    const loginBtn = document.getElementById('login-btn');
+    
+    loginBtn.addEventListener('click', () => {
+      // Redirect to the Google login route in your API
+      window.location.href = 'http://localhost:8080/auth/google';
+    });
+  </script>
+</body>
+</html>

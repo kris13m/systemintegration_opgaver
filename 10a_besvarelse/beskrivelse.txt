@@ -1,0 +1,1 @@
+brugte mysql workbench til at lave et database dump.

@@ -1,0 +1,4 @@
+https://github.com/DLShomies/swagger-api-contracts
+
+https://github.com/DLShomies/FluffyPlushiesWebShop
+
