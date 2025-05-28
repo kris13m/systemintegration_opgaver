@@ -13,7 +13,6 @@ app.get('/json', (req, res) => {
     res.json(data);
 });
 
-
 app.get('/client', async (req, res) => {
     try {
         // Attempt to fetch data from the other server
