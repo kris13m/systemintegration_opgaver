@@ -1,4 +1,5 @@
 start exposee's app.js in a terminal.
+running on http://localhost:3000
 start 
 
 send a POST request with payload format:
