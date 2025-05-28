@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stripe UI Demo</title>
+  <title>Stripe Elements Demo</title>
   <script src="https://js.stripe.com/v3/"></script>
   <style>
     #card-element {
@@ -10,19 +10,48 @@
       border-radius: 4px;
       max-width: 400px;
     }
+    #payment-form {
+      max-width: 400px;
+    }
   </style>
 </head>
 <body>
-  <h2>Fake Stripe Card Input (for looks only)</h2>
+  <h2>Stripe Card Payment</h2>
   <form id="payment-form">
     <div id="card-element"></div>
+    <button type="submit">Pay</button>
+    <div id="message"></div>
   </form>
 
   <script>
-    const stripe = Stripe('pk_test_51...');
+    const stripe = Stripe('pk_test_...'); // Replace with your public key
     const elements = stripe.elements();
     const card = elements.create('card');
     card.mount('#card-element');
+
+    const form = document.getElementById('payment-form');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await fetch('http://localhost:4242/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await res.json();
+
+      const result = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: card
+        }
+      });
+
+      if (result.error) {
+        message.textContent = `Error: ${result.error.message}`;
+      } else if (result.paymentIntent.status === 'succeeded') {
+        message.textContent = 'Payment succeeded!';
+      }
+    });
   </script>
 </body>
 </html>
