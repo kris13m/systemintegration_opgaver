@@ -1,9 +1,11 @@
-require('dotenv').config();
+// Load environment variables
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 const app = express();
 const PORT = 8080;
@@ -30,7 +32,7 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/callback',
 }, (accessToken, refreshToken, profile, done) => {
   currentUser = profile;  // Store user in memory
-  return done(null, profile); // You could also save to DB here if needed
+  return done(null, profile);
 }));
 
 passport.serializeUser((user, done) => done(null, user));
@@ -38,7 +40,6 @@ passport.deserializeUser((obj, done) => done(null, obj));
 
 // Routes for the API
 app.get('/', (req, res) => {
-  // Show the logged-in user's info, or a login button if not logged in
   if (currentUser) {
     res.send(`
       <h1>Hello, ${currentUser.displayName}!</h1>
@@ -64,7 +65,7 @@ app.get('/auth/google/callback',
 );
 
 app.get('/logout', (req, res) => {
-  currentUser = null;  // Clear the stored user
+  currentUser = null;
   res.redirect('/');
 });
 
