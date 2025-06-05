@@ -3,8 +3,8 @@ const path = require('path');
 const yaml = require('js-yaml');
 const xml2js = require('xml2js');
 
-// const file_path = '../Car/car.csv';
- const file_path = '../Car/car.xml'; // fix denne
+ const file_path = '../Car/car.csv';
+// const file_path = '../Car/car.xml'; 
 // const file_path = '../Car/car.yml';
 // const file_path = '../Car/car.txt';
 // const file_path = '../Car/car.json';
@@ -29,8 +29,8 @@ if(file_type == ".json") {
 }
 else if(file_type === ".xml") {
     const parser = new xml2js.Parser({
-        explicitArray: false,  // Avoid wrapping single elements in an array
-        mergeAttrs: true       // Merge attributes into the object (if any)
+        explicitArray: false,  
+        mergeAttrs: true       
     });
 
     const data = fs.readFileSync(file_path, 'utf-8');
@@ -41,7 +41,7 @@ else if(file_type === ".xml") {
             return;
         }
 
-        // If the result is an object (as expected), directly output it
+        
         if (typeof result === 'object') {
             console.log(JSON.stringify(result, null, 2));
         } else {

@@ -1,1 +1,4 @@
 brugte mysql workbench til at lave et database dump.
+
+brugte mysql workbench reverse engineer funktion
+klik database -> reverse engineer -> vælg db -> next, next, next -> producerer EER diagram.

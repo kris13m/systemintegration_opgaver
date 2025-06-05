@@ -1,3 +1,6 @@
+// KØRER PÅ http://localhost:3000
+// /JSON FOR AT LÆSE FRA EGEN DATA(LIBARAY)
+// /CLIENT FOR AT LAVE HTTP REQUEST TIL PY SERVER(CARS)
 const express = require('express');
 const fs = require('fs');
 const app = express();

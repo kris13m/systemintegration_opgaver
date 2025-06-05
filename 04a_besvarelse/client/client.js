@@ -1,5 +1,11 @@
-const eventSource = new EventSource("/timesync"); // parameter matcher navnet på endpoint
+// kør npx serve .
+
+const eventSource = new EventSource("http://localhost:8080/timesync");
+
+const container = document.getElementById("timestamps");
 
 eventSource.addEventListener("message", (event) => {
-    console.log(event.data);
+  const newTimestamp = document.createElement("div");
+  newTimestamp.textContent = event.data;
+  container.appendChild(newTimestamp);
 });

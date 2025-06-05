@@ -1,21 +1,25 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+
 const app = express();
+const PORT = 8080;
+
+app.use(cors({
+  origin: '*' 
+}));
 
 app.get('/timesync', (req, res) => {
-    res.setHeader('Content-Type', 'text/event-stream'); // data type er event stream
-    res.setHeader('Cache-Control', 'no-cache'); // ingen grund til at cache da der kommer ny data
-    res.setHeader('Connection', 'keep-alive'); // hold forbindelsen åben
+    res.setHeader('Content-Type', 'text/event-stream'); 
+    res.setHeader('Cache-Control', 'no-cache'); // caching ikke nødvendigt
+    res.setHeader('Connection', 'keep-alive'); // hold forbindelsen i live
 
     const interval = setInterval(() => {
-        res.write('data: ' + new Date().toISOString() + '\n\n'); // dette har ALTID formatet "data: " + *indsæt data her* + "\n\n"
+        res.write(`data: ${new Date().toISOString()}\n\n`); // SSE data har ALTID dette format
     }, 1000);
 
-    req.on('close', () => {
-        clearInterval(interval);
-    });
+    req.on('close', () => clearInterval(interval));
 });
 
-const PORT = 8080;
 app.listen(PORT, () => {
-    console.log(`Server is running on port http://localhost:${PORT}/timesync`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });

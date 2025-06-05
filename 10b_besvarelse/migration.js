@@ -1,28 +1,25 @@
-// in my example i have a mysql db with a person table and a favorite_songs and songs table
-
-import mysql from 'mysql2/promise';
+// my example has people and their favorite songs, migrating from MySql to mongo
+import Database from 'better-sqlite3';
 import { MongoClient } from 'mongodb';
 
-const mysqlConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'migrationDB',
-};
-
+const sqliteFile = './migrationDB.sqlite';
 const mongoUri = 'mongodb://localhost:27017';
 const mongoDbName = 'migrationMongo';
 
 async function migrate() {
-  const mysqlConn = await mysql.createConnection(mysqlConfig);
+  // Open SQLite DB
+  const sqliteDb = new Database(sqliteFile, { readonly: true });
+
+  // Connect Mongo
   const mongoClient = new MongoClient(mongoUri);
   await mongoClient.connect();
   const mongoDb = mongoClient.db(mongoDbName);
   const peopleCollection = mongoDb.collection('people');
 
-  console.log('Fetching data from MySQL...');
+  console.log('Fetching data from SQLite...');
 
-  const [rows] = await mysqlConn.execute(`
+ 
+  const rows = sqliteDb.prepare(`
     SELECT 
       p.id as person_id,
       p.name,
@@ -34,7 +31,7 @@ async function migrate() {
     JOIN favorite_songs fs ON p.id = fs.person_id
     JOIN songs s ON fs.song_id = s.id
     ORDER BY p.id
-  `);
+  `).all();
 
   // Group by person_id
   const grouped = new Map();
@@ -54,14 +51,12 @@ async function migrate() {
     });
   }
 
-  // Insert into MongoDB
   const documents = Array.from(grouped.values());
 
   console.log(`Inserting ${documents.length} people into MongoDB...`);
   await peopleCollection.insertMany(documents);
   console.log('Migration complete.');
 
-  await mysqlConn.end();
   await mongoClient.close();
 }
 

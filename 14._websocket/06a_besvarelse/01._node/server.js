@@ -11,7 +11,9 @@ server.on("connection", (ws) => {
         console.log("received message from client: "+ message);
 
         server.clients.forEach((client) => {
-            client.send(String(message));
+            message = message.toString();
+            message = message.toUpperCase().split("").reverse().join("");
+            client.send(message);
         })
     })
 

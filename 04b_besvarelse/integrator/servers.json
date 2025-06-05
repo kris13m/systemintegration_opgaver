@@ -1,0 +1,73 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "Login as Admin",
+            "Group": "04b - Greasy Slop Stops LLC",
+            "DBRestriction": "greasy_slop_stops_llc",
+            "Username": "psql_user",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10
+            }
+        },
+        "2": {
+            "Name": "Login as employee Janine",
+            "Group": "04b - Greasy Slop Stops LLC",
+            "DBRestriction": "greasy_slop_stops_llc",
+            "Username": "janine",
+            "Role": "employees",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10
+            }
+        },
+        "3": {
+            "Name": "Login as manager Dirk",
+            "Group": "04b - Greasy Slop Stops LLC",
+            "DBRestriction": "greasy_slop_stops_llc",
+            "Username": "dirk",
+            "Role": "managers",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10
+            }
+        },
+        "4": {
+            "Name": "Login as employee Anthony",
+            "Group": "04b - Greasy Slop Stops LLC",
+            "DBRestriction": "greasy_slop_stops_llc",
+            "Username": "anthony",
+            "Role": "employees",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10
+            }
+        },
+        "5": {
+            "Name": "Login as manager Elaine",
+            "Group": "04b - Greasy Slop Stops LLC",
+            "DBRestriction": "greasy_slop_stops_llc",
+            "Username": "elaine",
+            "Role": "managers",
+            "Host": "postgres",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10
+            }
+        }
+    }
+}

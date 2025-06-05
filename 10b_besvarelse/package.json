@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "10b_besvarelse",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "migration.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +11,7 @@
   "type": "module",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "better-sqlite3": "^11.10.0",
+    "mongodb": "^6.17.0"
   }
 }

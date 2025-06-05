@@ -1,4 +1,7 @@
 # startes ved at køre "uvicorn pyServer:app"
+# KØRER PÅ PORT 8000
+# /JSON FOR AT LÆSE FRA EGEN DATA(CAR)
+# /CLIENT FOR AT LAVE HTTP REQUEST TIL JS SERVER(LIBRARY)
 import yaml
 import xmltodict
 from fastapi import FastAPI
